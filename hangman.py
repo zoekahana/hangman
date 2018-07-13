@@ -1,7 +1,7 @@
 from random import choice
 
 
-# get ready to play some hangman bitches
+# get ready to play some hangman
 class Hangman(object):
     
     def __init__(self):
