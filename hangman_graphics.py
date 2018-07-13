@@ -62,6 +62,10 @@ def new_game(word_list):
             # col and row of letter on screen
             col = (int) (click.getX() / 61.5)
             row = (int) ((click.getY() - 525) / 50)
+            while (col < 0 or col > 13 or row < 0 or row > 1):
+                click = win.getMouse()
+                col = (int) (click.getX() / 61.5)
+                row = (int) ((click.getY() - 525) / 50)
             let_ind = col + (13 * row)
             letter = chr(65 + let_ind)
             # line crossing out letter
