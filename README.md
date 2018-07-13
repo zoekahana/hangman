@@ -1,6 +1,6 @@
 # hangman
 
-NOTE: hangman_graphics.py requires the use of John Zelle's graphics.py, a simple object oriented graphics library. The entire library can be reached here: http://mcsp.wartburg.edu/zelle/python/graphics.py
+NOTE: hangman_graphics.py requires the use of John Zelle's graphics.py, a simple object oriented graphics library. The entire library can be downloaded here: http://mcsp.wartburg.edu/zelle/python/graphics.py
 
 This repository includes a .txt file containing ~20,000 English words and two game files: one that you can play in your command prompt, and one that includes graphics.
 
