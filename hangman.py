@@ -6,7 +6,7 @@ class Hangman(object):
     
     def __init__(self):
         # list of possible words
-        self.word_list = open("words.txt").readlines()
+        self.word_list = open("words").readlines()
         self.playing = True
         
         while self.playing:
@@ -25,22 +25,22 @@ class Hangman(object):
             for i in range (0, len(self.word) - 1) :
                 self.print_word.append("_")
             # keeps making guesses while chances left and player not done
-            print "Welcome to Hangman! You have ten guesses."
+            print("Welcome to Hangman! You have ten guesses.")
             while self.chances > 0 and not self.won:
-                print "Your progress ::", "".join(self.print_word)
+                print("Your progress ::", "".join(self.print_word))
                 self.make_guess()
             # if player won
             if self.won:
                 print
-                print "Congratulations! You correctly guessed %s" % (self.word)
+                print("Congratulations! You correctly guessed %s" % (self.word))
             # if player lost
             else:
                 print
-                print "Sorry, you lost! The word was %s" % (self.word)
+                print("Sorry, you lost! The word was %s" % (self.word))
             # asks to play again
-            play_again = raw_input("Play again? Y for yes, N for no :: ").upper()
+            play_again = input("Play again? Y for yes, N for no :: ").upper()
             while (not play_again == 'Y' and not play_again == 'N'):
-                play_again = raw_input("Sorry, didn't quite get that! Y for yes, N for no :: ").upper()
+                play_again = input("Sorry, didn't quite get that! Y for yes, N for no :: ").upper()
             if (play_again == 'N'):
                 self.playing = False
                 
@@ -51,7 +51,7 @@ class Hangman(object):
         good = False
         while (not good):
             print
-            guess = raw_input("Enter your guess :: ").upper()
+            guess = input("Enter your guess :: ").upper()
             good = self.is_good(guess)
         self.check_guess(guess)
         
@@ -59,17 +59,17 @@ class Hangman(object):
     def is_good(self, guess):
         # in case of multiple letters
         if not len(guess) == 1:
-            print "One letter at a time, try again!"
+            print("One letter at a time, try again!")
             return False
         # ascii val of guess
         val = ord(guess)
         # in case of non letter
         if val < 65 or val > 90:
-            print "Guess must be a letter, try again!"
+            print("Guess must be a letter, try again!")
             return False
         # if letter already guessed
         if self.already_guessed[val - 65]:
-            print "Already guessed, try again!"
+            print("Already guessed, try again!")
             return False
         return True
       
@@ -86,12 +86,12 @@ class Hangman(object):
         # letter not in word
         if letter_count == 0:
             self.chances -= 1
-            print "Nope! %d chances remaining." % (self.chances)
+            print("Nope! %d chances remaining." % (self.chances))
         # letter in word
         else:
             # decreases number of letters left to guess
             self.letters_left -= letter_count
-            print "%s appeared %d times!" % (guess, letter_count)
+            print("%s appeared %d times!" % (guess, letter_count))
             # checks if player won
             if self.letters_left == 0:
                 self.won = True

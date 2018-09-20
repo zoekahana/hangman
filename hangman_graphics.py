@@ -42,7 +42,7 @@ def new_game(word_list):
         in_word = {}
         for i in range (0, len(word)):
             char = word[i]
-            if not in_word.has_key(char):
+            if not char in in_word:
                 in_word[char] = []
             in_word[char].append(i)
         
@@ -56,6 +56,8 @@ def new_game(word_list):
     
         lets_left = len(word)
         fails = 0
+        guessed = [];
+        
         # while player still has chances and hasn't solved
         while lets_left > 0 and fails < len(body):
             click = win.getMouse()
@@ -74,18 +76,19 @@ def new_game(word_list):
             cross_out.setWidth(3)
             cross_out.draw(win)
             # checks guess. draws body part if incorrect, fills in blanks if correct
-            if not in_word.has_key(letter):
+            if (letter not in in_word) and (letter not in guessed):
                 draw_body(fails, body, win)
                 fails += 1
+                guessed.append(letter)
             else:
-                # checks if letter has already been guessed (value will be False)
-                if not in_word[letter]:
+                # checks if letter has already been guessed
+                if letter in guessed:
                     continue
                 # changes letters in display and marks letter as guessed
                 for ind in in_word[letter]:
                     display[ind] = letter
                     lets_left -= 1
-                in_word[letter] = False
+                    guessed.append(letter)
                 label.setText(" ".join(display))
                 
         # congrats or loss message    
@@ -166,7 +169,7 @@ def begin_graph(win):
     # alphabet
     x_jump = 61.5
     for i in range(0, 26):
-        letter = Text(Point(30.75 + (x_jump * (i % 13)), 550 + (50 * (i / 13))), chr(65 + i))
+        letter = Text(Point(30.75 + (x_jump * (i % 13)), 550 + (50 * (int)(i / 13))), chr(65 + i))
         letter.setSize(30)
         letter.draw(win)
         
